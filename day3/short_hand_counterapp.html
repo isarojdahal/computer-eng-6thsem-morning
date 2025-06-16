@@ -1,0 +1,25 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="button" value="-" onclick="decreaseCount()" />
+    <span id="count">0</span>
+    <input type="button" value="+" onclick="increaseCount()" />
+  </body>
+  <script>
+    const span = document.getElementById("count");
+    function increaseCount() {
+      span.innerText = parseInt(span.innerText) + 1;
+    }
+
+    function decreaseCount() {
+      let value = parseInt(span.innerText);
+      if (value > 0) {
+        span.innerText = value - 1;
+      }
+    }
+  </script>
+</html>

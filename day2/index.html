@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form style="display: flex; direction: column; gap: 5px">
+      <label>Title</label>
+      <input type="text" name="title" id="" />
+      <label>Date</label>
+      <input type="date" name="date" id="" />
+      <br />
+      <input type="submit" value="Add" onclick="handleAdd(event)" />
+    </form>
+
+    <div id="data"></div>
+
+    <script>
+      function handleAdd(e) {
+        e.preventDefault();
+
+        const form = document.forms[0];
+        const title = form["title"].value;
+        const taskDate = form["date"].value;
+
+        console.log("title", title);
+        console.log("taskDate", taskDate);
+
+        const data = document.getElementById("data");
+        data.innerHTML += `<br/>${title}<br/>${taskDate}<br/>`;
+
+        form.reset();
+      }
+    </script>
+  </body>
+</html>
