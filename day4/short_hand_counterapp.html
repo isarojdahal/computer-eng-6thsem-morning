@@ -11,18 +11,20 @@
   </body>
   <script>
     const span = document.getElementById("count");
-    // function increaseCount() {
-    // span.innerText = parseInt(span.innerText) + 1;
-    // }
+
+    const count = localStorage.getItem("count");
+    span.innerText = count;
 
     const increaseCount = () => {
       span.innerText = parseInt(span.innerText) + 1;
+      localStorage.setItem("count", span.innerText);
     };
 
     function decreaseCount() {
       let value = parseInt(span.innerText);
       if (value > 0) {
         span.innerText = value - 1;
+        localStorage.setItem("count", span.innerText);
       }
     }
   </script>

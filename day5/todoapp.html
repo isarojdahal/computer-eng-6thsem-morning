@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input type="text" name="taskTitle" id="taskTitle" />
+
+      <input type="date" name="" id="taskDate" />
+
+      <input type="button" value="Add" onclick="handleAdd()" />
+    </form>
+    <div id="list"></div>
+
+    <hr />
+    <input type="button" value="Delete All" onclick="deleteAll()" />
+  </body>
+
+  <script>
+    const list = document.getElementById("list");
+    displayList();
+
+    window.onstorage = function () {
+      displayList();
+    };
+
+    function deleteAll() {
+      //   localStorage.clear(); //removes all the item
+      localStorage.removeItem("data");
+      displayList();
+    }
+    function handleAdd() {
+      const taskTitle = document.getElementById("taskTitle").value;
+      const taskDate = document.getElementById("taskDate").value;
+
+      console.log("TaskTitle", taskTitle);
+      console.log("task Date", taskDate);
+
+      let oldValues = JSON.parse(localStorage.getItem("data"));
+      if (!oldValues) oldValues = [];
+
+      localStorage.setItem(
+        "data",
+        JSON.stringify([...oldValues, { title: taskTitle, date: taskDate }])
+      );
+
+      displayList();
+      resetForm();
+    }
+    function displayList() {
+      let result = "";
+      const data = JSON.parse(localStorage.getItem("data"));
+      if (data && data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          result += `<div style="display:flex">
+                        Title : ${data[i].title}<br/>
+                        Date: ${data[i].date}<br/>
+                        <input type="button" value="Delete" onclick="deleteTodo(${i})"/><br/>
+                    </div>`;
+        }
+        list.innerHTML = result;
+      } else {
+        list.innerHTML = "No todos";
+      }
+    }
+
+    function deleteTodo(index) {
+      const data = JSON.parse(localStorage.getItem("data"));
+      const newData = data.filter(function (arr, i) {
+        return i != index;
+      });
+      localStorage.setItem("data", JSON.stringify(newData));
+      displayList();
+    }
+
+    function resetForm() {
+      document.getElementById("taskTitle").value = "";
+      document.getElementById("taskDate").value = "";
+    }
+  </script>
+</html>
