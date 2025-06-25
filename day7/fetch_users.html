@@ -1,0 +1,32 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="todo"></div>
+  </body>
+
+  <script>
+    fetch("https://jsonplaceholder.typicode.com/users").then(async function (
+      r
+    ) {
+      const json = await r.json();
+
+      let latTotal = 0;
+      let longTotal = 0;
+      // for of loop
+      for (const obj of json) {
+        latTotal += parseInt(obj.address.geo.lat);
+        longTotal += parseInt(obj.address.geo.lng);
+      }
+
+      document.getElementById(
+        "todo"
+      ).innerHTML += `Latitude total : ${latTotal}<br/>
+      Longitutde Total : ${longTotal}
+      `;
+    });
+  </script>
+</html>

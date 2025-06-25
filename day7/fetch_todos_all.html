@@ -1,0 +1,32 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="todo"></div>
+  </body>
+
+  <script>
+    fetch("https://jsonplaceholder.typicode.com/todos").then(async function (
+      r
+    ) {
+      const json = await r.json();
+      //   for (let i = 0; i < json.length; i++) {
+      //     document.getElementById("todo").innerHTML += `
+      //       <h1>${json[i].title}</h1>
+      //       <p>Completed: ${json[i].completed}</p>
+      //     `;
+      //   }
+
+      // for of loop
+      for (const obj of json) {
+        document.getElementById("todo").innerHTML += `
+            <h1>${obj.title}</h1>
+            <p>Completed: ${obj.completed}</p>
+          `;
+      }
+    });
+  </script>
+</html>
