@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    Enter the number of images you want to fetch. <br />
+    <input type="number" name="" id="count" />
+    <input type="button" value="Fetch" onclick="fetchImage()" />
+    <br /><br />
+  </body>
+
+  <script>
+    function fetchImage() {
+      const count = parseInt(document.getElementById("count").value);
+      fetch(
+        `https://api.nasa.gov/planetary/apod?count=${count}&api_key=oCbKxHolvbaNaH0rVler6YJPA2G1pmgrLn9jSb34`
+      ).then(async (res) => {
+        const json = await res.json();
+        for (const obj of json) {
+          document.body.innerHTML += `
+        <img src="${obj.url}" height="200" width="200"/>
+      `;
+        }
+      });
+    }
+  </script>
+</html>

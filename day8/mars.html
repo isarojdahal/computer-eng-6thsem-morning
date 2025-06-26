@@ -1,0 +1,18 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    fetch(
+      "https://api.nasa.gov/insight_weather/?api_key=oCbKxHolvbaNaH0rVler6YJPA2G1pmgrLn9jSb34&feedtype=json&ver=1.0"
+    ).then(async (res) => {
+      const json = await res.json();
+      //   document.body.innerHTML = `${json["675"]["AT"]["av"]}`;
+      document.body.innerHTML = `${json["675"].AT.av}`;
+    });
+  </script>
+</html>
